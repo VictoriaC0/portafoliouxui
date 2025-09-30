@@ -1,14 +1,14 @@
 /* ===== VARIABLES CSS ===== */
 :root {
-    --bg-primary: #0a0a0a;
+    --bg-primary: #1E1E1E;
     --bg-secondary: #1a1a1a;
-    --text-primary: #f0f0f0;
-    --text-secondary: #b0b0b0;
+    --text-primary: #F2F2F2;
+    --text-secondary: #F2F2F2;
     --accent-blue: #4a9eff;
     --accent-purple: #8a2be2;
     --accent-green: #3cb371;
-    --glass-bg: rgba(255, 255, 255, 0.05);
-    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-bg: rgba(255, 255, 255, 0.05);  
+    --glass-border: #F2F2F2;
     --glass-shadow: rgba(0, 0, 0, 0.3);
 }
 
@@ -24,7 +24,7 @@ html {
 }
 
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: "General Sans", sans-serif;
     background: var(--bg-primary);
     color: var(--text-primary);
     line-height: 1.6;
@@ -48,17 +48,13 @@ body {
     z-index: 1000;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    background: linear-gradient(135deg, 
-        rgba(74, 158, 255, 0.15) 0%,
-        rgba(138, 43, 226, 0.15) 50%,
-        rgba(60, 179, 113, 0.15) 100%);
     border: 1px solid var(--glass-border);
     border-radius: 50px;
     box-shadow: 0 8px 32px var(--glass-shadow);
     padding: 20px 0;
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 95vh;
 }
 
 .sidebar-content {
@@ -328,10 +324,11 @@ body {
 
 /* ===== TYPOGRAPHY ===== */
 .display-1 {
-    font-weight: 300;
+    font-weight: 200;
     font-size: clamp(3rem, 8vw, 6rem);
     letter-spacing: -0.02em;
     line-height: 1.1;
+    font-style: italic;
 }
 
 .display-2 {
@@ -376,7 +373,7 @@ body {
 }
 
 .intro-text strong {
-    color: var(--accent-blue);
+    /*color: var(--accent-blue);*/
     font-weight: 600;
 }
 
