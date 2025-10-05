@@ -4,7 +4,7 @@
     --bg-secondary: #1a1a1a;
     --text-primary: #F2F2F2;
     --text-secondary: #F2F2F2;
-    --accent-blue: #4a9eff;
+    --accent-blue: #72EBFF;
     --accent-purple: #8a2be2;
     --accent-green: #3cb371;
     --glass-bg: rgba(255, 255, 255, 0.05);  
@@ -44,14 +44,12 @@ body {
     left: 30px;
     transform: translateY(-50%);
     width: 80px;
-    height: 400px;
     z-index: 1000;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid var(--glass-border);
     border-radius: 50px;
     box-shadow: 0 8px 32px var(--glass-shadow);
-    padding: 20px 0;
+    padding: 40px 0;
     display: flex;
     flex-direction: column;
     height: 95vh;
@@ -68,7 +66,6 @@ body {
 .nav-top {
     flex: 1;
     display: flex;
-    align-items: center;
 }
 
 .nav-bottom {
