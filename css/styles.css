@@ -440,9 +440,8 @@ body {
 }
 
 .btn-outline-light:active {
-    border: 1px solid var(--glass-border);
     background-color: var(--accent-blue) !important;
-    border-colo r: yellow !important;
+    border-color: yellow !important;
     color: --bg-primary !important;
 }
 
