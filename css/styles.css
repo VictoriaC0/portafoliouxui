@@ -439,6 +439,13 @@ body {
     gap: 0.5rem;
 }
 
+.btn-outline-light:active {
+    border: 1px solid var(--glass-border);
+    background-color: var(--accent-blue) !important;
+    border-colo r: yellow !important;
+    color: --bg-primary !important;
+}
+
 .btn-outline-light:hover {
     background: var(--glass-bg);
     border-color: var(--accent-blue);
