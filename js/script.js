@@ -1,6 +1,6 @@
 // ===== VARIABLES GLOBALES =====
 let currentSection = 0;
-const sections = ['inicio', 'exploraciones', 'acerca', 'contacto', 'traduccion'];
+const sections = ['inicio', 'casos', 'acerca', 'contacto', 'traduccion'];
 let isScrolling = false;
 let touchStartX = 0;
 let touchStartY = 0;
