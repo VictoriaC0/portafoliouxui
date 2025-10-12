@@ -6,7 +6,11 @@ let touchStartX = 0;
 let touchStartY = 0;
 
 // ===== INICIALIZACIÓN =====
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
+    // Inicializar módulos
+    await initializeModules();
+    
+    // Inicializar navegación existente
     initializeNavigation();
     initializeResponsiveNavigation();
     initializeNavigationArrows();
@@ -18,6 +22,24 @@ document.addEventListener('DOMContentLoaded', function() {
     // Configurar overflow inicial según el tamaño de pantalla
     handleResponsiveLayout();
 });
+
+// ===== INICIALIZACIÓN DE MÓDULOS =====
+async function initializeModules() {
+    // Cargar módulos solo si están disponibles
+    if (typeof TemplateLoader !== 'undefined') {
+        window.templateLoader = new TemplateLoader();
+    }
+    
+    if (typeof Navigation !== 'undefined') {
+        window.navigation = new Navigation();
+        await window.navigation.init();
+    }
+    
+    if (typeof ProjectManager !== 'undefined') {
+        window.projectManager = new ProjectManager();
+        await window.projectManager.init();
+    }
+}
 
 // ===== NAVEGACIÓN UNIFICADA =====
 function initializeNavigation() {
