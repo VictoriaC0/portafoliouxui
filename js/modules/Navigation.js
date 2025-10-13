@@ -66,6 +66,17 @@ class Navigation {
     handleNavigationClick(e, link) {
         const href = link.getAttribute('href');
         const dataSection = link.getAttribute('data-section');
+        const currentPage = this.getCurrentPage();
+
+        // Si estamos en una página de proyecto, siempre redirigir al index.html
+        if (currentPage.startsWith('proyecto-') || currentPage.startsWith('caso-')) {
+            e.preventDefault();
+            // Construir la URL correcta para redirigir al index.html
+            const baseUrl = window.location.origin + window.location.pathname.replace(/\/[^\/]*$/, '/');
+            const targetUrl = baseUrl + 'index.html' + (dataSection ? '#' + dataSection : '');
+            window.location.href = targetUrl;
+            return;
+        }
 
         // Si es un enlace interno (empieza con #), manejar con scroll
         if (href.startsWith('#')) {
@@ -107,7 +118,16 @@ class Navigation {
             link.classList.remove('active');
         });
 
-        // Agregar clase activa según la página/sección actual
+        // Si estamos en una página de proyecto, marcar "Casos" como activo
+        if (currentPage.startsWith('proyecto-') || currentPage.startsWith('caso-')) {
+            const casosLink = document.querySelector('[data-section="casos"]');
+            if (casosLink) {
+                casosLink.classList.add('active');
+            }
+            return;
+        }
+
+        // Agregar clase activa según la página/sección actual (solo en index.html)
         if (currentSection) {
             const activeLink = document.querySelector(`[data-section="${currentSection}"]`);
             if (activeLink) {

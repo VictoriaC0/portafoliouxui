@@ -65,7 +65,7 @@ class TemplateLoader {
                     </li>
                 </ul>
             </div>
-            
+
             <!-- Bottom Navigation Item -->
             <div class="nav-bottom">
                 <ul class="nav flex-column">

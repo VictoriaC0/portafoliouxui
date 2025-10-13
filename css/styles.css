@@ -272,21 +272,28 @@ body {
     position: relative;
 }
 
-/* Desktop: Horizontal Layout */
+/* Desktop: Horizontal Layout (Para index.html y páginas de proyecto) */
 @media (min-width: 992px) {
-    html, body {
+    body.index-page,
+    body.project-page {
         overflow: hidden;
     }
-    
-    .sections-container {
+
+    body.index-page html,
+    body.project-page html {
+        overflow: hidden;
+    }
+
+    /* Index: 5 secciones */
+    body.index-page .sections-container {
         display: flex;
         width: 500vw; /* 5 sections × 100vw each */
         height: 100vh;
         transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         will-change: transform;
     }
-    
-    .section {
+
+    body.index-page .section {
         width: 100vw;
         height: 100vh;
         flex-shrink: 0;
@@ -295,6 +302,27 @@ body {
         justify-content: center;
         position: relative;
         padding: 0 120px; /* Space for floating sidebar */
+    }
+
+    /* Proyectos: 4 secciones (resumen, proceso, solucion, resultados) */
+    body.project-page .sections-container {
+        display: flex;
+        width: 400vw; /* 4 sections × 100vw each */
+        height: 100vh;
+        transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        will-change: transform;
+    }
+
+    body.project-page .section {
+        width: 100vw;
+        height: 100vh;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        padding: 0 120px; /* Space for floating sidebar */
+        overflow-y: auto; /* Permitir scroll vertical dentro de la sección si el contenido es muy largo */
     }
 }
 

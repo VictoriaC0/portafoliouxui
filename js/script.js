@@ -1,6 +1,7 @@
 // ===== VARIABLES GLOBALES =====
 let currentSection = 0;
 const sections = ['inicio', 'casos', 'acerca', 'contacto', 'traduccion'];
+const projectSections = ['resumen', 'proceso', 'solucion', 'resultados'];
 let isScrolling = false;
 let touchStartX = 0;
 let touchStartY = 0;
@@ -9,19 +10,37 @@ let touchStartY = 0;
 document.addEventListener('DOMContentLoaded', async function() {
     // Inicializar módulos
     await initializeModules();
-    
-    // Inicializar navegación existente
-    initializeNavigation();
-    initializeResponsiveNavigation();
-    initializeNavigationArrows();
-    
-    // Establecer sección activa inicial
-    updateActiveSection('inicio');
-    updateArrowStates();
-    
-    // Configurar overflow inicial según el tamaño de pantalla
-    handleResponsiveLayout();
+
+    const currentPage = getCurrentPageName();
+
+    if (currentPage === 'index') {
+        // Inicializar navegación específica del portafolio en index.html
+        initializeNavigation();
+        initializeResponsiveNavigation();
+        initializeNavigationArrows();
+
+        // Establecer sección activa inicial
+        updateActiveSection('inicio');
+        updateArrowStates();
+
+        // Configurar overflow inicial según el tamaño de pantalla
+        handleResponsiveLayout();
+    } else if (currentPage.startsWith('proyecto-')) {
+        // Inicializar navegación para páginas de proyecto
+        initializeProjectNavigation();
+        initializeProjectResponsiveNavigation();
+
+        // Configurar overflow inicial según el tamaño de pantalla
+        handleProjectResponsiveLayout();
+    }
 });
+
+// ===== UTILIDADES =====
+function getCurrentPageName() {
+    const path = window.location.pathname;
+    const filename = path.split('/').pop();
+    return filename.replace('.html', '') || 'index';
+}
 
 // ===== INICIALIZACIÓN DE MÓDULOS =====
 async function initializeModules() {
@@ -310,20 +329,160 @@ function updateArrowStates() {
 
 // ===== MANEJO RESPONSIVE =====
 function handleResponsiveLayout() {
+    const currentPage = getCurrentPageName();
+
+    // Solo aplicar layout especial en index.html
+    if (currentPage !== 'index') return;
+
     if (window.innerWidth >= 992) {
-        // Desktop mode
+        // Desktop mode - scroll horizontal
         document.body.style.overflow = 'hidden';
         document.documentElement.style.overflow = 'hidden';
         scrollToHorizontalSection(currentSection);
         updateArrowStates();
     } else {
-        // Mobile mode
+        // Mobile mode - scroll vertical
         document.body.style.overflow = 'auto';
         document.documentElement.style.overflow = 'auto';
         const currentSectionId = sections[currentSection];
         setTimeout(() => {
             scrollToVerticalSection(currentSectionId);
         }, 100);
+    }
+}
+
+// ===== NAVEGACIÓN PARA PÁGINAS DE PROYECTO =====
+function initializeProjectNavigation() {
+    // No necesita navegación con clicks porque los enlaces redirigen al index
+    // Solo inicializar scroll horizontal
+}
+
+function initializeProjectResponsiveNavigation() {
+    if (window.innerWidth >= 992) {
+        initializeProjectDesktopNavigation();
+    } else {
+        initializeProjectMobileNavigation();
+    }
+}
+
+function initializeProjectDesktopNavigation() {
+    const currentPage = getCurrentPageName();
+
+    // Prevenir scroll por defecto y convertir a horizontal
+    document.addEventListener('wheel', function(e) {
+        if (window.innerWidth < 992 || !currentPage.startsWith('proyecto-')) return;
+
+        e.preventDefault();
+
+        if (isScrolling) return;
+
+        const delta = e.deltaY || e.deltaX;
+        const threshold = 50;
+
+        if (Math.abs(delta) > threshold) {
+            if (delta > 0 && currentSection < projectSections.length - 1) {
+                // Scroll hacia derecha
+                currentSection++;
+                scrollToHorizontalSection(currentSection);
+            } else if (delta < 0 && currentSection > 0) {
+                // Scroll hacia izquierda
+                currentSection--;
+                scrollToHorizontalSection(currentSection);
+            }
+        }
+    }, { passive: false });
+
+    // Navegación con teclado
+    document.addEventListener('keydown', function(e) {
+        if (window.innerWidth < 992 || !currentPage.startsWith('proyecto-')) return;
+
+        switch(e.key) {
+            case 'ArrowRight':
+            case 'ArrowDown':
+            case ' ': // Spacebar
+                e.preventDefault();
+                if (currentSection < projectSections.length - 1) {
+                    currentSection++;
+                    scrollToHorizontalSection(currentSection);
+                }
+                break;
+            case 'ArrowLeft':
+            case 'ArrowUp':
+                e.preventDefault();
+                if (currentSection > 0) {
+                    currentSection--;
+                    scrollToHorizontalSection(currentSection);
+                }
+                break;
+            case 'Home':
+                e.preventDefault();
+                currentSection = 0;
+                scrollToHorizontalSection(currentSection);
+                break;
+            case 'End':
+                e.preventDefault();
+                currentSection = projectSections.length - 1;
+                scrollToHorizontalSection(currentSection);
+                break;
+        }
+    });
+
+    // Touch gestures
+    document.addEventListener('touchstart', function(e) {
+        if (window.innerWidth < 992 || !currentPage.startsWith('proyecto-')) return;
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+
+    document.addEventListener('touchend', function(e) {
+        if (window.innerWidth < 992 || !currentPage.startsWith('proyecto-')) return;
+
+        const touchEndX = e.changedTouches[0].clientX;
+        const touchEndY = e.changedTouches[0].clientY;
+        const diffX = touchStartX - touchEndX;
+        const diffY = touchStartY - touchEndY;
+
+        // Detectar swipe horizontal
+        if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+            if (diffX > 0 && currentSection < projectSections.length - 1) {
+                currentSection++;
+                scrollToHorizontalSection(currentSection);
+            } else if (diffX < 0 && currentSection > 0) {
+                currentSection--;
+                scrollToHorizontalSection(currentSection);
+            }
+        }
+        // Detectar swipe vertical
+        else if (Math.abs(diffY) > Math.abs(diffX) && Math.abs(diffY) > 50) {
+            if (diffY > 0 && currentSection < projectSections.length - 1) {
+                currentSection++;
+                scrollToHorizontalSection(currentSection);
+            } else if (diffY < 0 && currentSection > 0) {
+                currentSection--;
+                scrollToHorizontalSection(currentSection);
+            }
+        }
+    }, { passive: true });
+}
+
+function initializeProjectMobileNavigation() {
+    // En mobile, scroll vertical normal - no necesita configuración especial
+}
+
+function handleProjectResponsiveLayout() {
+    const currentPage = getCurrentPageName();
+
+    if (!currentPage.startsWith('proyecto-')) return;
+
+    if (window.innerWidth >= 992) {
+        // Desktop mode - scroll horizontal
+        document.body.style.overflow = 'hidden';
+        document.documentElement.style.overflow = 'hidden';
+        scrollToHorizontalSection(currentSection);
+    } else {
+        // Mobile mode - scroll vertical
+        document.body.style.overflow = 'auto';
+        document.documentElement.style.overflow = 'auto';
     }
 }
 
@@ -358,8 +517,14 @@ function debounce(func, wait, immediate) {
 
 // ===== RESPONSIVE HANDLING =====
 window.addEventListener('resize', debounce(function() {
-    // Reinicializar navegación según el tamaño de pantalla
-    handleResponsiveLayout();
+    const currentPage = getCurrentPageName();
+
+    // Reinicializar navegación según la página
+    if (currentPage === 'index') {
+        handleResponsiveLayout();
+    } else if (currentPage.startsWith('proyecto-')) {
+        handleProjectResponsiveLayout();
+    }
 }, 250));
 
 // ===== ANIMACIONES Y EFECTOS =====
@@ -438,7 +603,10 @@ window.addEventListener('load', function() {
 
 // ===== PREVENIR SCROLL POR DEFECTO EN DESKTOP =====
 document.addEventListener('DOMContentLoaded', function() {
-    if (window.innerWidth >= 992) {
+    const currentPage = getCurrentPageName();
+    
+    // Solo aplicar estas restricciones en index.html
+    if (currentPage === 'index' && window.innerWidth >= 992) {
         // Prevenir scroll por defecto
         document.addEventListener('scroll', function(e) {
             e.preventDefault();
@@ -457,22 +625,29 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // ===== SMOOTH SCROLLING PARA ENLACES =====
 document.addEventListener('DOMContentLoaded', function() {
-    // Smooth scrolling para enlaces internos
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            const href = this.getAttribute('href');
-            if (href === '#' || href === '') return;
-            
-            e.preventDefault();
-            const targetId = href.substring(1);
-            navigateToSection(targetId);
+    const currentPage = getCurrentPageName();
+    
+    // Solo aplicar smooth scrolling en index.html
+    if (currentPage === 'index') {
+        // Smooth scrolling para enlaces internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href === '#' || href === '') return;
+                
+                e.preventDefault();
+                const targetId = href.substring(1);
+                navigateToSection(targetId);
+            });
         });
-    });
+    }
 });
 
 // ===== NAVEGACIÓN CON NÚMEROS =====
 document.addEventListener('keydown', function(e) {
-    if (window.innerWidth < 992) return;
+    const currentPage = getCurrentPageName();
+    
+    if (window.innerWidth < 992 || currentPage !== 'index') return;
     
     const num = parseInt(e.key);
     if (num >= 1 && num <= sections.length) {
