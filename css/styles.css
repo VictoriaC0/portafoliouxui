@@ -31,6 +31,19 @@ body {
     height: 100vh;
 }
 
+/* Prevenir scroll por defecto en páginas con clases específicas (desktop) */
+@media (min-width: 992px) {
+    html:has(body.index-page),
+    html:has(body.project-page) {
+        overflow: hidden;
+    }
+
+    body.index-page,
+    body.project-page {
+        overflow: hidden;
+    }
+}
+
 /* ===== NAVEGACIÓN UNIFICADA ===== */
 .navigation {
     position: relative;

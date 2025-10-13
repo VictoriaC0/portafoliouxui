@@ -6,6 +6,21 @@ let isScrolling = false;
 let touchStartX = 0;
 let touchStartY = 0;
 
+// ===== PREVENIR SCROLL INMEDIATAMENTE EN PÁGINAS DE PROYECTO (DESKTOP) =====
+// Esto se ejecuta ANTES de DOMContentLoaded para prevenir el flash de scroll
+(function() {
+    const path = window.location.pathname;
+    const filename = path.split('/').pop();
+    const currentPage = filename.replace('.html', '') || 'index';
+
+    if (currentPage.startsWith('proyecto-') && window.innerWidth >= 992) {
+        document.addEventListener('scroll', function(e) {
+            e.preventDefault();
+            window.scrollTo(0, 0);
+        }, { passive: false });
+    }
+})();
+
 // ===== INICIALIZACIÓN =====
 document.addEventListener('DOMContentLoaded', async function() {
     // Inicializar módulos
@@ -19,8 +34,17 @@ document.addEventListener('DOMContentLoaded', async function() {
         initializeResponsiveNavigation();
         initializeNavigationArrows();
 
+        // Detectar si hay un hash en la URL para navegar a esa sección
+        const hash = window.location.hash.replace('#', '');
+        const targetSection = hash && sections.includes(hash) ? hash : 'inicio';
+        const sectionIndex = sections.indexOf(targetSection);
+
+        if (sectionIndex !== -1) {
+            currentSection = sectionIndex;
+        }
+
         // Establecer sección activa inicial
-        updateActiveSection('inicio');
+        updateActiveSection(targetSection);
         updateArrowStates();
 
         // Configurar overflow inicial según el tamaño de pantalla
@@ -335,15 +359,11 @@ function handleResponsiveLayout() {
     if (currentPage !== 'index') return;
 
     if (window.innerWidth >= 992) {
-        // Desktop mode - scroll horizontal
-        document.body.style.overflow = 'hidden';
-        document.documentElement.style.overflow = 'hidden';
+        // Desktop mode - scroll horizontal (overflow hidden ya está en CSS)
         scrollToHorizontalSection(currentSection);
         updateArrowStates();
     } else {
         // Mobile mode - scroll vertical
-        document.body.style.overflow = 'auto';
-        document.documentElement.style.overflow = 'auto';
         const currentSectionId = sections[currentSection];
         setTimeout(() => {
             scrollToVerticalSection(currentSectionId);
@@ -475,15 +495,10 @@ function handleProjectResponsiveLayout() {
     if (!currentPage.startsWith('proyecto-')) return;
 
     if (window.innerWidth >= 992) {
-        // Desktop mode - scroll horizontal
-        document.body.style.overflow = 'hidden';
-        document.documentElement.style.overflow = 'hidden';
+        // Desktop mode - scroll horizontal (overflow hidden ya está en CSS)
         scrollToHorizontalSection(currentSection);
-    } else {
-        // Mobile mode - scroll vertical
-        document.body.style.overflow = 'auto';
-        document.documentElement.style.overflow = 'auto';
     }
+    // En mobile el CSS ya maneja el overflow auto
 }
 
 // ===== UTILIDADES =====

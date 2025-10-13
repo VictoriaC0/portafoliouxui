@@ -70,11 +70,8 @@ class Navigation {
 
         // Si estamos en una página de proyecto, siempre redirigir al index.html
         if (currentPage.startsWith('proyecto-') || currentPage.startsWith('caso-')) {
-            e.preventDefault();
-            // Construir la URL correcta para redirigir al index.html
-            const baseUrl = window.location.origin + window.location.pathname.replace(/\/[^\/]*$/, '/');
-            const targetUrl = baseUrl + 'index.html' + (dataSection ? '#' + dataSection : '');
-            window.location.href = targetUrl;
+            // No prevenir el evento - dejar que el href del enlace funcione normalmente
+            // Los enlaces ya tienen href="index.html#seccion"
             return;
         }
 
