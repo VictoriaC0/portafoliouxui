@@ -19,7 +19,8 @@
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
-    <!-- Navigation will be loaded here -->
+
+    <!-- Navigation container -->
     <div id="navigation-container"></div>
 
     <!-- Main Container -->
@@ -27,14 +28,22 @@
         <!-- Contenedor de Secciones Unificado -->
         <div id="sections-container" class="sections-container">
             
-             <!-- Section 1: Resumen del Proyecto -->
-             <section id="resumen" class="section" data-section="resumen">
+            <!-- Section 1: Resumen del Proyecto -->
+            <section id="resumen" class="section" data-section="resumen">
                 <div class="container-fluid h-100">
-                    <div class="row h-100 align-items-center justify-content-center">
+                    <div class="row h-100 align-items-center">
                         <div class="col-lg-10">
                             <div class="case-header mb-5">
                                 <h1 class="display-2 mb-4">{{CASE_TITLE}}</h1>
                                 <p class="lead case-subtitle">{{CASE_SUBTITLE}}</p>
+                            </div>
+                            <div class="project-context mb-5">
+                                <h3>Contexto</h3>
+                                <p>{{CONTEXT}}</p>
+                            </div>
+                            <div class="project-challenge">
+                                <h3>Desafío</h3>
+                                <p>{{CHALLENGE}}</p>
                             </div>
                         </div>
                     </div>
@@ -50,7 +59,7 @@
                             
                             <div class="row">
                                 <div class="col-lg-6 mb-4">
-                                    <h3>Contexto</h3>
+                                    <h3>Contexto2</h3>
                                     <p>{{CONTEXT}}</p>
                                     
                                     <h3 class="mt-4">Desafío</h3>
@@ -126,7 +135,7 @@
                                     <a href="../index.html#casos" class="btn btn-outline-light me-3">
                                         <i class="ph ph-arrow-left me-2"></i>Volver a Proyectos
                                     </a>
-                                    <a href="{{NEXT_PROJECT_LINK}}" class="btn btn-outline-light">
+                                    <a href="/{{NEXT_PROJECT_LINK}}" class="btn btn-outline-light next-project-link">
                                         Ver Siguiente Caso <i class="ph ph-arrow-right ms-2"></i>
                                     </a>
                                 </div>

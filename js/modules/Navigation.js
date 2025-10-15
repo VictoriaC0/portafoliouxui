@@ -4,17 +4,17 @@
 class Navigation {
     constructor() {
         this.templateLoader = new TemplateLoader();
-        this.isLoaded = false;
     }
 
     /**
      * Inicializa la navegación cargando el template
      */
     async init() {
-        if (this.isLoaded) return;
+        const container = document.getElementById('navigation-container');
+        if (!container) return;
 
         try {
-            // Cargar template de navegación
+            // Cargar template de navegación solo si existe el contenedor
             await this.templateLoader.renderTemplate('navigation', {}, 'navigation-container');
             
             // Inicializar eventos de navegación
@@ -22,26 +22,8 @@ class Navigation {
             
             // Actualizar estado activo según la página actual
             this.updateActiveState();
-            
-            this.isLoaded = true;
         } catch (error) {
             console.error('Error initializing navigation:', error);
-            // Fallback: usar navegación HTML estática si existe
-            this.useStaticNavigation();
-        }
-    }
-
-    /**
-     * Usa navegación estática como fallback
-     */
-    useStaticNavigation() {
-        const container = document.getElementById('navigation-container');
-        if (container && !container.innerHTML.trim()) {
-            console.log('Using static navigation fallback');
-            // La navegación ya está en el HTML, solo inicializar eventos
-            this.initializeNavigationEvents();
-            this.updateActiveState();
-            this.isLoaded = true;
         }
     }
 

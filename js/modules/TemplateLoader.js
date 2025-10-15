@@ -16,7 +16,7 @@ class TemplateLoader {
         // Template de navegación embebido (usar el archivo navigation.html)
         // No hay template embebido - se usa el archivo navigation.html
 
-        // Template de tarjeta de proyecto embebido
+        // Template de tarjeta de proyecto embebido (idéntico al template real)
         this.embeddedTemplates.set('project-card', `
 <div class="col-md-4 mb-4">
     <div class="project-card" data-project="{{PROJECT_ID}}">
@@ -29,9 +29,9 @@ class TemplateLoader {
             <div class="project-tags">
                 {{PROJECT_TAGS}}
             </div>
-            <a href="{{PROJECT_LINK}}" class="btn btn-outline-light btn-sm mt-3">
+            <button class="btn btn-outline-light btn-sm mt-3 view-project" data-project="{{PROJECT_ID}}">
                 Ver Proyecto <i class="ph ph-arrow-right ms-2" aria-hidden="true"></i>
-            </a>
+            </button>
         </div>
     </div>
 </div>`);

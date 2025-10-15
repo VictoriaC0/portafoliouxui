@@ -6,12 +6,20 @@ class ProjectManager {
         this.templateLoader = new TemplateLoader();
         this.projects = [];
         this.currentProject = null;
+        this.isTemplateLoaded = false;
     }
 
     /**
      * Inicializa el gestor de proyectos
      */
     async init() {
+        // Cargar el template de caso si estamos en una página de proyecto
+        const currentPage = window.location.pathname.split('/').pop().replace('.html', '');
+        if (currentPage.startsWith('proyecto-')) {
+            await this.loadProjectTemplate(currentPage);
+            return;
+        }
+
         // Definir los proyectos
         this.projects = [
             {
@@ -20,7 +28,7 @@ class ProjectManager {
                 description: 'Transformación digital de procesos administrativos para mejorar la eficiencia operacional y la experiencia del usuario.',
                 image: 'https://via.placeholder.com/400x300/72EBFF/1E1E1E?text=Digitalización',
                 tags: ['UX Research', 'Process Design', 'Digital Transformation'],
-                link: 'proyecto-1.html',
+                link: 'proyecto-1',
                 caseData: {
                     CASE_TITLE: 'Digitalización de Procesos',
                     CASE_SUBTITLE: 'Transformación digital de procesos administrativos',
@@ -34,7 +42,7 @@ class ProjectManager {
                     METRICS: '<div class="metric-item"><h5>60%</h5><p>Reducción de tiempo</p></div><div class="metric-item"><h5>80%</h5><p>Satisfacción usuario</p></div>',
                     LEARNINGS: 'La clave está en mantener la simplicidad mientras se agrega funcionalidad avanzada.',
                     NEXT_STEPS: 'Implementar funcionalidades de análisis predictivo y expandir a otros departamentos.',
-                    NEXT_PROJECT_LINK: 'proyecto-2.html'
+                    NEXT_PROJECT_LINK: 'proyecto-2'
                 }
             },
             {
@@ -43,7 +51,7 @@ class ProjectManager {
                 description: 'Aplicación móvil para gestión personal de finanzas con enfoque en educación financiera y control de gastos.',
                 image: 'https://via.placeholder.com/400x300/8a2be2/1E1E1E?text=App+Financiera',
                 tags: ['Mobile Design', 'Financial UX', 'Data Visualization'],
-                link: 'proyecto-2.html',
+                link: 'proyecto-2',
                 caseData: {
                     CASE_TITLE: 'App de Gestión Financiera',
                     CASE_SUBTITLE: 'Control financiero personal al alcance de todos',
@@ -57,7 +65,7 @@ class ProjectManager {
                     METRICS: '<div class="metric-item"><h5>45%</h5><p>Aumento en ahorro</p></div><div class="metric-item"><h5>70%</h5><p>Mejora en conocimiento</p></div>',
                     LEARNINGS: 'La gamificación y la educación son clave para mantener el engagement en apps financieras.',
                     NEXT_STEPS: 'Desarrollar funcionalidades de inversión y expandir a mercados internacionales.',
-                    NEXT_PROJECT_LINK: 'proyecto-3.html'
+                    NEXT_PROJECT_LINK: 'proyecto-3'
                 }
             },
             {
@@ -66,7 +74,7 @@ class ProjectManager {
                 description: 'Plataforma web para educación online con herramientas de colaboración y seguimiento del progreso estudiantil.',
                 image: 'https://via.placeholder.com/400x300/3cb371/1E1E1E?text=E-learning',
                 tags: ['Web Platform', 'Educational UX', 'Collaboration Tools'],
-                link: 'proyecto-3.html',
+                link: 'proyecto-3',
                 caseData: {
                     CASE_TITLE: 'Plataforma de E-learning',
                     CASE_SUBTITLE: 'Educación online colaborativa y efectiva',
@@ -80,7 +88,7 @@ class ProjectManager {
                     METRICS: '<div class="metric-item"><h5>85%</h5><p>Completion rate</p></div><div class="metric-item"><h5>60%</h5><p>Satisfacción estudiantil</p></div>',
                     LEARNINGS: 'La colaboración y el feedback inmediato son fundamentales para el éxito en educación online.',
                     NEXT_STEPS: 'Implementar IA para personalización de contenido y expandir herramientas de evaluación.',
-                    NEXT_PROJECT_LINK: 'proyecto-1.html'
+                    NEXT_PROJECT_LINK: 'proyecto-1'
                 }
             }
         ];
@@ -127,17 +135,20 @@ class ProjectManager {
         const projectCards = document.querySelectorAll('.project-card[data-project]');
         
         projectCards.forEach(card => {
-            card.addEventListener('click', (e) => {
-                // Evitar navegación si se hace click en el botón específico
-                if (e.target.closest('.btn')) return;
-                
-                const projectId = card.getAttribute('data-project');
-                const project = this.projects.find(p => p.id === projectId);
-                
-                if (project) {
-                    window.location.href = project.link;
-                }
-            });
+            // Manejar el clic en el botón de ver proyecto
+            const viewButton = card.querySelector('.view-project');
+            if (viewButton) {
+                viewButton.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const projectId = viewButton.getAttribute('data-project');
+                    if (projectId) {
+                        // Usar history.pushState para cambiar la URL sin recargar
+                        const newUrl = `/${projectId}`;
+                        history.pushState({ projectId }, '', newUrl);
+                        this.loadProjectTemplate(projectId);
+                    }
+                });
+            }
 
             // Efecto hover mejorado
             card.addEventListener('mouseenter', () => {
@@ -205,6 +216,49 @@ class ProjectManager {
         const path = window.location.pathname;
         const filename = path.split('/').pop();
         return filename.replace('.html', '') || 'index';
+    }
+
+    /**
+     * Carga y renderiza el template de caso para un proyecto
+     * @param {string} projectId - ID del proyecto a cargar
+     */
+    async loadProjectTemplate(projectId) {
+        if (this.isTemplateLoaded) return;
+
+        // Encontrar el proyecto
+        const project = this.projects.find(p => p.id === projectId);
+        if (!project) {
+            console.error(`Project ${projectId} not found`);
+            return;
+        }
+
+        try {
+            // Cargar el contenido del template
+            const templateContent = await fetch('templates/case-template.html').then(res => res.text());
+            if (!templateContent) {
+                console.error('Failed to load case template');
+                return;
+            }
+
+            // Reemplazar placeholders con datos del proyecto
+            let content = templateContent;
+            Object.entries(project.caseData).forEach(([key, value]) => {
+                content = content.replace(new RegExp(`{{${key}}}`, 'g'), value);
+            });
+
+            // Reemplazar el contenido del body manteniendo el head
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(content, 'text/html');
+            document.body.innerHTML = doc.body.innerHTML;
+            
+            this.isTemplateLoaded = true;
+            
+            // Inicializar eventos después de cargar el template
+            this.initializeProjectEvents();
+
+        } catch (error) {
+            console.error('Error loading project template:', error);
+        }
     }
 }
 
