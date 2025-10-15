@@ -7,6 +7,9 @@ class ProjectManager {
         this.projects = [];
         this.currentProject = null;
         this.currentProjectIndex = -1;
+        this.currentProjectSection = 0;
+        this.projectSections = ["resumen", "proceso", "solucion", "resultados"];
+        this.isScrolling = false;
     }
 
     /**
@@ -154,9 +157,10 @@ class ProjectManager {
                 content = content.replace(new RegExp(`{{${key}}}`, "g"), value);
             });
 
-            const mainContainer = document.getElementById("main-container");
-            if (mainContainer) {
-                mainContainer.innerHTML = content;
+            const sectionsContainer = document.querySelector(".sections-container");
+            if (sectionsContainer) {
+                sectionsContainer.innerHTML = content;
+                this.initializeProjectNavigation();
             }
 
             this.initializeProjectNavigationButtons();
@@ -194,11 +198,106 @@ class ProjectManager {
         // Por ahora, con navegación circular, no es estrictamente necesario.
     }
 
+    initializeProjectNavigation() {
+        if (window.innerWidth >= 992) {
+            // Manejo del scroll con rueda del mouse
+            document.addEventListener("wheel", (e) => {
+                if (window.innerWidth < 992) return;
+                e.preventDefault();
+                if (this.isScrolling) return;
+
+                const delta = e.deltaY || e.deltaX;
+                const threshold = 50;
+
+                if (Math.abs(delta) > threshold) {
+                    if (delta > 0 && this.currentProjectSection < this.projectSections.length - 1) {
+                        this.currentProjectSection++;
+                        this.scrollToProjectSection(this.currentProjectSection);
+                    } else if (delta < 0 && this.currentProjectSection > 0) {
+                        this.currentProjectSection--;
+                        this.scrollToProjectSection(this.currentProjectSection);
+                    }
+                }
+            }, { passive: false });
+
+            // Manejo de navegación con teclado
+            document.addEventListener("keydown", (e) => {
+                if (window.innerWidth < 992) return;
+                switch(e.key) {
+                    case "ArrowRight":
+                    case "ArrowDown":
+                        e.preventDefault();
+                        if (this.currentProjectSection < this.projectSections.length - 1) {
+                            this.currentProjectSection++;
+                            this.scrollToProjectSection(this.currentProjectSection);
+                        }
+                        break;
+                    case "ArrowLeft":
+                    case "ArrowUp":
+                        e.preventDefault();
+                        if (this.currentProjectSection > 0) {
+                            this.currentProjectSection--;
+                            this.scrollToProjectSection(this.currentProjectSection);
+                        }
+                        break;
+                }
+            });
+
+            // Manejo de eventos touch
+            let touchStartX = 0;
+            let touchStartY = 0;
+
+            document.addEventListener("touchstart", (e) => {
+                if (window.innerWidth < 992) return;
+                touchStartX = e.touches[0].clientX;
+                touchStartY = e.touches[0].clientY;
+            }, { passive: true });
+
+            document.addEventListener("touchend", (e) => {
+                if (window.innerWidth < 992) return;
+                const touchEndX = e.changedTouches[0].clientX;
+                const touchEndY = e.changedTouches[0].clientY;
+                const diffX = touchStartX - touchEndX;
+                const diffY = touchStartY - touchEndY;
+
+                if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+                    if (diffX > 0 && this.currentProjectSection < this.projectSections.length - 1) {
+                        this.currentProjectSection++;
+                        this.scrollToProjectSection(this.currentProjectSection);
+                    } else if (diffX < 0 && this.currentProjectSection > 0) {
+                        this.currentProjectSection--;
+                        this.scrollToProjectSection(this.currentProjectSection);
+                    }
+                }
+            }, { passive: true });
+        }
+    }
+
+    scrollToProjectSection(index) {
+        const sectionsContainer = document.querySelector(".sections-container");
+        if (!sectionsContainer) return;
+        
+        this.isScrolling = true;
+        const translateX = -index * 100;
+        sectionsContainer.style.transform = `translateX(${translateX}vw)`;
+        
+        setTimeout(() => {
+            this.isScrolling = false;
+        }, 800);
+
+        this.currentProjectSection = index;
+    }
+
     handleProjectResponsiveLayout() {
         if (window.innerWidth >= 992) {
-            // Lógica específica para desktop en páginas de proyecto si es necesario
+            // Asegurarse de que la sección actual esté correctamente posicionada
+            this.scrollToProjectSection(this.currentProjectSection);
         } else {
-            // Lógica específica para móvil en páginas de proyecto si es necesario
+            // En móvil, resetear la transformación para permitir scroll vertical
+            const sectionsContainer = document.querySelector(".sections-container");
+            if (sectionsContainer) {
+                sectionsContainer.style.transform = "none";
+            }
         }
     }
 }
