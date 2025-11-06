@@ -2,7 +2,7 @@
 
 // ===== VARIABLES GLOBALES =====
 let currentSection = 0;
-const sections = ["inicio", "casos", "acerca", "contacto", "traduccion"];
+const sections = ["inicio", "casos", "acerca", "contacto"];
 const projectSections = ["resumen", "proceso", "solucion", "resultados"]; // Secciones dentro de un caso de estudio
 let isScrolling = false;
 let touchStartX = 0;

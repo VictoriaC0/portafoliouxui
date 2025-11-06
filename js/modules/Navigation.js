@@ -98,9 +98,9 @@ class Navigation {
         });
 
         // Si estamos en una página de proyecto, marcar "Casos" como activo
-        if (currentPage.startsWith('proyecto-') || currentPage.startsWith('caso-')) {
-            const casosLink = document.querySelector('[data-section="casos"]');
-            if (casosLink) {
+        if (currentPage.startsWith('proyecto-') || currentPage.startsWith('Caso-')) {
+            const CasosLink = document.querySelector('[data-section="Casos"]');
+            if (CasosLink) {
                 casosLink.classList.add('active');
             }
             return;

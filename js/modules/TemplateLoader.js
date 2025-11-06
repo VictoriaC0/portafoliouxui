@@ -20,8 +20,8 @@ class TemplateLoader {
         this.embeddedTemplates.set('project-card', `
 <div class="col-md-4 mb-4">
     <div class="project-card" data-project="{{PROJECT_ID}}">
-        <div class="project-image">
-            <img src="{{PROJECT_IMAGE}}" alt="{{PROJECT_TITLE}}" class="img-fluid">
+        <div class="project-icon">
+         <i class="ph ph-{{PROJECT_ICON}}"></i>
         </div>
         <div class="project-content">
             <h4>{{PROJECT_TITLE}}</h4>

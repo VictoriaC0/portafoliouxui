@@ -21,7 +21,7 @@ class ProjectManager {
                 id: "proyecto-1",
                 title: "Digitalización de Procesos",
                 description: "Transformación digital de procesos administrativos para mejorar la eficiencia operacional y la experiencia del usuario.",
-                image: "https://via.placeholder.com/400x300/72EBFF/1E1E1E?text=Digitalización",
+                icon: "device-mobile", // 👈 nuevo campo con el nombre del ícono,
                 tags: ["UX Research", "Process Design", "Digital Transformation"],
                 link: "project.html?id=proyecto-1",
                 caseData: {
@@ -45,7 +45,7 @@ class ProjectManager {
                 id: "proyecto-2",
                 title: "App de Gestión Financiera",
                 description: "Aplicación móvil para gestión personal de finanzas con enfoque en educación financiera y control de gastos.",
-                image: "https://via.placeholder.com/400x300/8a2be2/1E1E1E?text=App+Financiera",
+                icon: "device-mobile", // 👈 nuevo campo con el nombre del ícono,
                 tags: ["Mobile Design", "Financial UX", "Data Visualization"],
                 link: "project.html?id=proyecto-2",
                 caseData: {
@@ -69,7 +69,7 @@ class ProjectManager {
                 id: "proyecto-3",
                 title: "Plataforma de E-learning",
                 description: "Plataforma web para educación online con herramientas de colaboración y seguimiento del progreso estudiantil.",
-                image: "https://via.placeholder.com/400x300/3cb371/1E1E1E?text=E-learning",
+                icon: "device-mobile", // 👈 nuevo campo con el nombre del ícono,
                 tags: ["Web Platform", "Educational UX", "Collaboration Tools"],
                 link: "project.html?id=proyecto-3",
                 caseData: {
@@ -97,7 +97,7 @@ class ProjectManager {
     }
 
     async renderProjects() {
-        const container = document.querySelector("#casos .row.mt-5");
+        const container = document.querySelector("#Casos .row.mt-5");
         if (!container) return;
         container.innerHTML = "";
         for (const project of this.projects) {
@@ -105,7 +105,7 @@ class ProjectManager {
                 PROJECT_ID: project.id,
                 PROJECT_TITLE: project.title,
                 PROJECT_DESCRIPTION: project.description,
-                PROJECT_IMAGE: project.image,
+                PROJECT_ICON: project.icon,
                 PROJECT_TAGS: project.tags.map(tag => `<span class="badge bg-secondary me-1">${tag}</span>`).join(""),
                 PROJECT_LINK: project.link
             };
