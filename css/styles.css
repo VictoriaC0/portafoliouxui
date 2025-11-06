@@ -419,11 +419,13 @@ body {
 .project-content {
   display: flex;
   flex-direction: column; /* mantiene el orden vertical de los elementos */
+  flex: 1; /* ocupa todo el espacio vertical disponible dentro de la card */
   align-items: flex-start; /* alineación por defecto: izquierda */
 }
 
 .project-content .view-project {
   align-self:center; /* 👈 mueve solo el botón hacia el centro */
+  margin-top: auto; /* 👈 empuja el botón al fondo de la card */
 }
 
 .project-card {
@@ -435,6 +437,9 @@ body {
     padding: 2rem;
     transition: all 0.3s ease;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* asegura que todas las cards midan lo mismo dentro del grid */
 }
 
 .project-card:hover {
@@ -771,10 +776,15 @@ body {
     margin-bottom: 1rem;
     line-height: 1.6;
     text-align: left;
+    flex-grow: 1; /* 👈 hace que el texto se expanda para ocupar espacio */
 }
 
 .project-tags {
     margin-bottom: 1rem;
+    display: flex;
+    justify-content: center; /* centra las tags horizontalmente */
+    flex-wrap: wrap;          /* permite que bajen de línea si son muchas */
+    gap: 0.2rem;              /* espacio entre badges */
 }
 
 .project-tags .badge {
