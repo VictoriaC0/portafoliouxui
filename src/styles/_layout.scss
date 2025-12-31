@@ -88,6 +88,12 @@
         scroll-snap-align: start; // Enable scroll snapping
     }
 
+    // Project pages: ajustar alineación vertical en mobile
+    body.project-page .section {
+        align-items: flex-start; // Start from top instead of center
+        padding: 4rem 20px 2rem; // Menos padding superior
+    }
+
     // Override background-size for inicio section in mobile
     #inicio {
         background-size: cover !important;

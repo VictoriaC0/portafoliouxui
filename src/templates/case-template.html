@@ -1,20 +1,23 @@
 <div class="sections-container">
     <!-- Section 1: Resumen del Proyecto -->
-    <section id="resumen" class="section" data-section="resumen">
+    <section id="resumen" class="section section-case-intro" data-section="resumen">
         <div class="container-fluid h-100">
-            <div class="row h-100 align-items-center justify-content-center">
-                <div class="col-lg-10">
-                    <div class="case-header mb-5">
-                        <h1 class="display-2 mb-4">{{CASE_TITLE}}</h1>
-                        <p class="lead case-subtitle">{{CASE_SUBTITLE}}</p>
-                    </div>
-                    <div class="project-context mb-5">
-                        <h3>Contexto</h3>
-                        <p>{{CONTEXT}}</p>
-                    </div>
-                    <div class="project-challenge">
-                        <h3>Desafío</h3>
-                        <p>{{CHALLENGE}}</p>
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="case-intro-content">
+                        <h1 class="case-main-title">{{CASE_TITLE}}</h1>
+                        <p class="case-main-subtitle">{{CASE_SUBTITLE}}</p>
+
+                        <div class="case-intro-sections">
+                            <div class="case-intro-item">
+                                <h2 class="case-section-title">Contexto</h2>
+                                <p class="case-section-text">{{CONTEXT}}</p>
+                            </div>
+                            <div class="case-intro-item">
+                                <h2 class="case-section-title">Desafío</h2>
+                                <p class="case-section-text">{{CHALLENGE}}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -22,26 +25,34 @@
     </section>
 
     <!-- Section 2: Proceso -->
-    <section id="proceso" class="section" data-section="proceso">
+    <section id="proceso" class="section section-case-process" data-section="proceso">
         <div class="container-fluid h-100">
-            <div class="row h-100 align-items-center justify-content-center">
-                <div class="col-lg-10">
-                    <h2 class="display-3 mb-5">Proceso de Diseño</h2>
-                    
-                    <div class="row">
-                        <div class="col-lg-6 mb-4">
-                            <h3>Contexto</h3>
-                            <p>{{CONTEXT}}</p>
-                            
-                            <h3 class="mt-4">Desafío</h3>
-                            <p>{{CHALLENGE}}</p>
-                        </div>
-                        <div class="col-lg-6 mb-4">
-                            <h3>Metodología</h3>
-                            <p>{{METHODOLOGY}}</p>
-                            
-                            <h3 class="mt-4">Investigación</h3>
-                            <p>{{RESEARCH}}</p>
+            <div class="row h-100 align-items-start justify-content-center">
+                <div class="col-12">
+                    <div class="case-process-content">
+                        <h1 class="case-main-title">Proceso de Diseño</h1>
+
+                        <div class="case-process-grid">
+                            <div class="case-process-column">
+                                <div class="case-process-item">
+                                    <h2 class="case-section-title">Contexto</h2>
+                                    <p class="case-section-text">{{CONTEXT}}</p>
+                                </div>
+                                <div class="case-process-item">
+                                    <h2 class="case-section-title">Desafío</h2>
+                                    <p class="case-section-text">{{CHALLENGE}}</p>
+                                </div>
+                            </div>
+                            <div class="case-process-column">
+                                <div class="case-process-item">
+                                    <h2 class="case-section-title">Metodología</h2>
+                                    <p class="case-section-text">{{METHODOLOGY}}</p>
+                                </div>
+                                <div class="case-process-item">
+                                    <h2 class="case-section-title">Investigación</h2>
+                                    <p class="case-section-text">{{RESEARCH}}</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -50,26 +61,31 @@
     </section>
 
     <!-- Section 3: Solución -->
-    <section id="solucion" class="section" data-section="solucion">
+    <section id="solucion" class="section section-case-solution" data-section="solucion">
         <div class="container-fluid h-100">
-            <div class="row h-100 align-items-center justify-content-center">
-                <div class="col-lg-10">
-                    <h2 class="display-3 mb-5">Solución Final</h2>
-                    
-                    <div class="row">
-                        <div class="col-lg-8 mb-4">
-                            <h3>Propuesta de Valor</h3>
-                            <p>{{SOLUTION_DESCRIPTION}}</p>
-                            
-                            <h3 class="mt-4">Características Principales</h3>
-                            <ul class="feature-list">
-                                {{FEATURES_LIST}}
-                            </ul>
-                        </div>
-                        <div class="col-lg-4 mb-4">
-                            <div class="solution-highlight">
-                                <h4>Impacto Clave</h4>
-                                <p>{{KEY_IMPACT}}</p>
+            <div class="row h-100 align-items-start justify-content-center">
+                <div class="col-12">
+                    <div class="case-solution-content">
+                        <h1 class="case-main-title">Solución Final</h1>
+
+                        <div class="case-solution-grid">
+                            <div class="case-solution-main">
+                                <div class="case-solution-item">
+                                    <h2 class="case-section-title">Propuesta de Valor</h2>
+                                    <p class="case-section-text">{{SOLUTION_DESCRIPTION}}</p>
+                                </div>
+                                <div class="case-solution-item">
+                                    <h2 class="case-section-title">Características Principales</h2>
+                                    <ul class="case-features-list">
+                                        {{FEATURES_LIST}}
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="case-solution-sidebar">
+                                <div class="case-impact-box">
+                                    <h3 class="case-impact-title">Impacto Clave</h3>
+                                    <p class="case-impact-text">{{KEY_IMPACT}}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -79,36 +95,41 @@
     </section>
 
     <!-- Section 4: Resultados -->
-    <section id="resultados" class="section" data-section="resultados">
+    <section id="resultados" class="section section-case-results" data-section="resultados">
         <div class="container-fluid h-100">
-            <div class="row h-100 align-items-center justify-content-center">
-                <div class="col-lg-10">
-                    <h2 class="display-3 mb-5">Resultados y Aprendizajes</h2>
-                    
-                    <div class="row">
-                        <div class="col-lg-6 mb-4">
-                            <h3>Métricas de Éxito</h3>
-                            <div class="metrics-grid">
-                                {{METRICS}}
+            <div class="row h-100 align-items-start justify-content-center">
+                <div class="col-12">
+                    <div class="case-results-content">
+                        <h1 class="case-main-title">Resultados y Aprendizajes</h1>
+
+                        <div class="case-results-grid">
+                            <div class="case-results-column">
+                                <h2 class="case-section-title">Métricas de Éxito</h2>
+                                <div class="case-metrics-grid">
+                                    {{METRICS}}
+                                </div>
+                            </div>
+                            <div class="case-results-column">
+                                <div class="case-results-item">
+                                    <h2 class="case-section-title">Aprendizajes Clave</h2>
+                                    <p class="case-section-text">{{LEARNINGS}}</p>
+                                </div>
+                                <div class="case-results-item">
+                                    <h2 class="case-section-title">Próximos Pasos</h2>
+                                    <p class="case-section-text">{{NEXT_STEPS}}</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-lg-6 mb-4">
-                            <h3>Aprendizajes Clave</h3>
-                            <p>{{LEARNINGS}}</p>
-                            
-                            <h3 class="mt-4">Próximos Pasos</h3>
-                            <p>{{NEXT_STEPS}}</p>
-                        </div>
-                    </div>
-                    
-                    <div class="row mt-5">
-                        <div class="col-12 text-center">
-                            <a href="index.html#casos" class="btn btn-outline-light me-3">
-                                <i class="ph ph-arrow-left me-2"></i>Volver a Proyectos
-                            </a>
-                            <a href="{{NEXT_PROJECT_LINK}}" id="nextProjectBtn" class="btn btn-outline-light next-project-link">
-                                Siguiente Proyecto <i class="ph ph-arrow-right ms-2"></i>
-                            </a>
+
+                        <div class="case-navigation-buttons">
+                            <button class="case-nav-button case-nav-back">
+                                <i class="ph ph-arrow-left"></i>
+                                <span>Volver a Proyectos</span>
+                            </button>
+                            <button class="case-nav-button case-nav-next">
+                                <span>Siguiente Proyecto</span>
+                                <i class="ph ph-arrow-right"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -116,9 +137,3 @@
         </div>
     </section>
 </div>
-
-<div class="project-navigation-arrows">
-    <button id="prevProjectBtn" class="project-nav-btn prev"><i class="ph ph-arrow-left"></i></button>
-    <button id="nextProjectBtn" class="project-nav-btn next"><i class="ph ph-arrow-right"></i></button>
-</div>
-

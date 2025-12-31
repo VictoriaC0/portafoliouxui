@@ -160,6 +160,224 @@
     font-style: italic;
 }
 
+// ===== CASE STUDY SECTIONS =====
+
+// Global case study styles
+.case-main-title {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    color: $text-primary;
+}
+
+.case-main-subtitle {
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    font-weight: 300;
+    font-style: italic;
+    color: $text-secondary;
+    margin-bottom: 4rem;
+}
+
+.case-section-title {
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    font-weight: 500;
+    margin-bottom: 1rem;
+    color: $text-primary;
+}
+
+.case-section-text {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    line-height: 1.6;
+    color: $text-secondary;
+}
+
+// Section 1: Intro
+.section-case-intro {
+    .case-intro-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem 0;
+    }
+
+    .case-intro-sections {
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+        margin-top: 4rem;
+    }
+
+    .case-intro-item {
+        max-width: 800px;
+    }
+}
+
+// Section 2: Process
+.section-case-process {
+    .case-process-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 2rem 0;
+    }
+
+    .case-process-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        margin-top: 3rem;
+    }
+
+    .case-process-column {
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+    }
+
+    .case-process-item {
+        // No additional styles needed, uses global case styles
+    }
+}
+
+// Section 3: Solution
+.section-case-solution {
+    .case-solution-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 2rem 0;
+    }
+
+    .case-solution-grid {
+        display: grid;
+        grid-template-columns: 1fr 400px;
+        gap: 4rem;
+        margin-top: 3rem;
+    }
+
+    .case-solution-main {
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+    }
+
+    .case-features-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+
+        li {
+            font-size: clamp(1rem, 1.5vw, 1.125rem);
+            line-height: 1.6;
+            color: $text-secondary;
+            padding-left: 1.5rem;
+            position: relative;
+
+            &:before {
+                content: '✓';
+                position: absolute;
+                left: 0;
+                color: $accent-blue;
+                font-weight: bold;
+                font-size: 1.2em;
+            }
+        }
+    }
+
+    .case-impact-box {
+        background: rgba(255, 255, 255, 0.03);
+        border: 2px solid $accent-green;
+        border-radius: 12px;
+        padding: 2rem;
+        height: fit-content;
+        position: sticky;
+        top: 2rem;
+
+        .case-impact-title {
+            font-size: clamp(1.25rem, 2vw, 1.5rem);
+            font-weight: 500;
+            color: $accent-green;
+            margin-bottom: 1rem;
+        }
+
+        .case-impact-text {
+            font-size: clamp(0.95rem, 1.3vw, 1.05rem);
+            line-height: 1.6;
+            color: $text-secondary;
+            margin: 0;
+        }
+    }
+}
+
+// Section 4: Results
+.section-case-results {
+    .case-results-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 2rem 0;
+    }
+
+    .case-results-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        margin-top: 3rem;
+        margin-bottom: 4rem;
+    }
+
+    .case-results-column {
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+    }
+
+    .case-metrics-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+    }
+
+    .case-navigation-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-top: 4rem;
+    }
+
+    .case-nav-button {
+        background: transparent;
+        border: 2px solid $glass-border;
+        border-radius: 50px;
+        padding: 1rem 2.5rem;
+        color: $text-primary;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all $transition-base;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+
+        i {
+            font-size: 1.25rem;
+        }
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: $accent-blue;
+            color: $accent-blue;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(74, 158, 255, 0.3);
+        }
+
+        &:active {
+            transform: translateY(0);
+        }
+    }
+}
+
 .metrics-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
@@ -169,26 +387,31 @@
 
 .metric-item {
     text-align: center;
-    padding: 1rem;
-    @include glass-effect;
+    padding: 2rem 1.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
     transition: all $transition-base;
 
     &:hover {
         transform: translateY(-3px);
         box-shadow: 0 8px 25px rgba(74, 158, 255, 0.2);
+        border-color: rgba(114, 235, 255, 0.3);
     }
 
     h5 {
-        font-size: 2rem;
-        font-weight: 600;
+        font-size: clamp(3rem, 5vw, 4rem);
+        font-weight: 300;
         color: $accent-blue;
         margin-bottom: 0.5rem;
+        line-height: 1;
     }
 
     p {
-        font-size: 0.9rem;
+        font-size: clamp(0.9rem, 1.2vw, 1rem);
         color: $text-secondary;
         margin: 0;
+        font-weight: 300;
     }
 }
 
@@ -226,6 +449,115 @@
         }
     }
 }
+
+// Responsive adjustments for case studies
+@media (max-width: $breakpoint-desktop) {
+
+    .case-process-grid,
+    .case-solution-grid,
+    .case-results-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+
+    .case-solution-grid {
+        .case-solution-main {
+            order: 2;
+        }
+
+        .case-solution-sidebar {
+            order: 1;
+        }
+    }
+
+    .case-impact-box {
+        position: relative !important;
+        top: auto !important;
+    }
+
+    // Ajustar padding de las secciones en tablet
+    .section-case-intro,
+    .section-case-process,
+    .section-case-solution,
+    .section-case-results {
+        .container-fluid {
+            padding: 2rem 1.5rem;
+        }
+    }
+}
+
+@media (max-width: $breakpoint-tablet) {
+
+    // Forzar todos los grids a 1 columna en mobile
+    .case-process-grid,
+    .case-solution-grid,
+    .case-results-grid {
+        grid-template-columns: 1fr !important;
+        gap: 2rem;
+    }
+
+    .case-intro-sections,
+    .case-process-column,
+    .case-solution-main,
+    .case-results-column {
+        gap: 2rem;
+    }
+
+    .case-navigation-buttons {
+        flex-direction: column;
+        gap: 1rem;
+
+        .case-nav-button {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+
+    .case-metrics-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem;
+    }
+
+    // Reducir tamaños de fuente en mobile
+    .case-main-title {
+        margin-bottom: 1rem;
+    }
+
+    .case-main-subtitle {
+        margin-bottom: 2.5rem;
+    }
+
+    .case-intro-sections,
+    .case-process-grid,
+    .case-solution-grid,
+    .case-results-grid {
+        margin-top: 2rem;
+    }
+
+    // Ajustar padding de métricas en mobile
+    .metric-item {
+        padding: 1.5rem 1rem;
+
+        h5 {
+            font-size: clamp(2.5rem, 8vw, 3rem);
+        }
+    }
+
+    // Ajustar caja de impacto en mobile
+    .case-impact-box {
+        padding: 1.5rem;
+    }
+
+    // Resetear orden en mobile
+    .case-solution-grid {
+
+        .case-solution-main,
+        .case-solution-sidebar {
+            order: initial;
+        }
+    }
+}
+
 
 // ===== TRANSLATION SERVICES =====
 .translation-services {

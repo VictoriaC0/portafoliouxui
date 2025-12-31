@@ -1,19 +1,31 @@
 <div class="container-fluid h-100">
-    <div class="row h-100 align-items-center justify-content-center">
-        <div class="col-lg-10">
-            <h2 class="display-3 mb-5">Resultados y Aprendizajes</h2>
+    <div class="row h-100 align-items-start justify-content-center">
+        <div class="col-12">
+            <div class="case-results-content">
+                <h1 class="case-main-title">Resultados y Aprendizajes</h1>
 
-            <div class="row">
-                <div class="col-lg-6 mb-4">
-                    <h3>Métricas de Éxito</h3>
-                    <div class="metrics-grid" [innerHTML]="caseData().METRICS"></div>
-                </div>
-                <div class="col-lg-6 mb-4">
-                    <h3>Aprendizajes Clave</h3>
-                    <p>{{ caseData().LEARNINGS }}</p>
-
-                    <h3 class="mt-4">Próximos Pasos</h3>
-                    <p>{{ caseData().NEXT_STEPS }}</p>
+                <div class="case-results-grid">
+                    <div class="case-results-column">
+                        <h2 class="case-section-title">Métricas de Éxito</h2>
+                        <div class="case-metrics-grid">
+                            @for (metric of caseData().metrics; track metric.label) {
+                            <div class="metric-item">
+                                <h5>{{ metric.value }}</h5>
+                                <p>{{ metric.label }}</p>
+                            </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="case-results-column">
+                        <div class="case-results-item">
+                            <h2 class="case-section-title">Aprendizajes Clave</h2>
+                            <p class="case-section-text">{{ caseData().learnings }}</p>
+                        </div>
+                        <div class="case-results-item">
+                            <h2 class="case-section-title">Próximos Pasos</h2>
+                            <p class="case-section-text">{{ caseData().nextSteps }}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

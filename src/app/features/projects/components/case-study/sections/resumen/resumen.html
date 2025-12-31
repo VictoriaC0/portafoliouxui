@@ -1,17 +1,20 @@
 <div class="container-fluid h-100">
-    <div class="row h-100 align-items-center justify-content-center">
-        <div class="col-lg-10">
-            <div class="case-header mb-5">
-                <h1 class="display-2 mb-4">{{ caseData().CASE_TITLE }}</h1>
-                <p class="lead case-subtitle">{{ caseData().CASE_SUBTITLE }}</p>
-            </div>
-            <div class="project-context mb-5">
-                <h3>Contexto</h3>
-                <p>{{ caseData().CONTEXT }}</p>
-            </div>
-            <div class="project-challenge">
-                <h3>Desafío</h3>
-                <p>{{ caseData().CHALLENGE }}</p>
+    <div class="row h-100 align-items-center">
+        <div class="col-12">
+            <div class="case-intro-content">
+                <h1 class="case-main-title">{{ caseData().title }}</h1>
+                <p class="case-main-subtitle">{{ caseData().subtitle }}</p>
+
+                <div class="case-intro-sections">
+                    <div class="case-intro-item">
+                        <h2 class="case-section-title">Contexto</h2>
+                        <p class="case-section-text">{{ caseData().context }}</p>
+                    </div>
+                    <div class="case-intro-item">
+                        <h2 class="case-section-title">Desafío</h2>
+                        <p class="case-section-text">{{ caseData().challenge }}</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

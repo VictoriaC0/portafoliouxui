@@ -1,20 +1,29 @@
 <div class="container-fluid h-100">
-    <div class="row h-100 align-items-center justify-content-center">
-        <div class="col-lg-10">
-            <h2 class="display-3 mb-5">Solución Final</h2>
+    <div class="row h-100 align-items-start justify-content-center">
+        <div class="col-12">
+            <div class="case-solution-content">
+                <h1 class="case-main-title">Solución Final</h1>
 
-            <div class="row">
-                <div class="col-lg-8 mb-4">
-                    <h3>Propuesta de Valor</h3>
-                    <p>{{ caseData().SOLUTION_DESCRIPTION }}</p>
-
-                    <h3 class="mt-4">Características Principales</h3>
-                    <ul class="feature-list" [innerHTML]="caseData().FEATURES_LIST"></ul>
-                </div>
-                <div class="col-lg-4 mb-4">
-                    <div class="solution-highlight">
-                        <h4>Impacto Clave</h4>
-                        <p>{{ caseData().KEY_IMPACT }}</p>
+                <div class="case-solution-grid">
+                    <div class="case-solution-main">
+                        <div class="case-solution-item">
+                            <h2 class="case-section-title">Propuesta de Valor</h2>
+                            <p class="case-section-text">{{ caseData().solutionDescription }}</p>
+                        </div>
+                        <div class="case-solution-item">
+                            <h2 class="case-section-title">Características Principales</h2>
+                            <ul class="case-features-list">
+                                @for (feature of caseData().features; track feature.title) {
+                                <li>{{ feature.title }}</li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="case-solution-sidebar">
+                        <div class="case-impact-box">
+                            <h3 class="case-impact-title">Impacto Clave</h3>
+                            <p class="case-impact-text">{{ caseData().keyImpact }}</p>
+                        </div>
                     </div>
                 </div>
             </div>

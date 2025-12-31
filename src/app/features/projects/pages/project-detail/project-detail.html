@@ -7,19 +7,19 @@
     @if (project(); as proj) {
     <div id="sections-container" class="sections-container">
 
-        <section id="resumen" class="section" data-section="resumen">
+        <section id="resumen" class="section section-case-intro" data-section="resumen">
             <app-resumen [caseData]="proj.caseStudy"></app-resumen>
         </section>
 
-        <section id="proceso" class="section" data-section="proceso">
+        <section id="proceso" class="section section-case-process" data-section="proceso">
             <app-proceso [caseData]="proj.caseStudy"></app-proceso>
         </section>
 
-        <section id="solucion" class="section" data-section="solucion">
+        <section id="solucion" class="section section-case-solution" data-section="solucion">
             <app-solucion [caseData]="proj.caseStudy"></app-solucion>
         </section>
 
-        <section id="resultados" class="section" data-section="resultados">
+        <section id="resultados" class="section section-case-results" data-section="resultados">
             <app-resultados [caseData]="proj.caseStudy"></app-resultados>
         </section>
 
