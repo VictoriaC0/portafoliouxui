@@ -29,11 +29,11 @@
     }
 
     .nav-top {
-        flex: 1;
         display: flex;
-        align-items: center;
-        justify-content: center;
+        align-items: flex-start;
+        justify-content: flex-start;
         width: 100%;
+        padding-top: 10px;
 
         .nav {
             width: 100%;
@@ -126,6 +126,75 @@
                         border-color: rgba(114, 235, 255, 0.5);
                     }
                 }
+            }
+        }
+    }
+
+    .nav-bottom {
+        padding-bottom: 10px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
+        .translation-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 8px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.8);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid transparent;
+            background: transparent;
+            font-weight: 400;
+            font-size: 0.75rem;
+            position: relative;
+            overflow: hidden;
+            width: 80px;
+
+            .nav-icon {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 24px;
+                height: 24px;
+
+                i {
+                    font-size: 16px;
+                    transition: all 0.3s ease;
+                }
+            }
+
+            .nav-text {
+                text-align: center;
+                line-height: 1;
+
+                span {
+                    font-size: 10px;
+                    font-weight: 500;
+                    text-transform: uppercase;
+                    letter-spacing: 0.5px;
+                }
+            }
+
+            &:hover {
+                background: rgba(255, 255, 255, 0.08);
+                transform: scale(1.05);
+                color: #F2F2F2;
+
+                .nav-icon i {
+                    color: #72EBFF;
+                    transform: scale(1.1);
+                }
+            }
+
+            &:focus {
+                outline: 2px solid #72EBFF;
+                outline-offset: 2px;
             }
         }
     }
