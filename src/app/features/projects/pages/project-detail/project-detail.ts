@@ -5,6 +5,7 @@ import { Project } from '../../../../core/models/project.model';
 import { ProjectService } from '../../../../core/services/project.service';
 import { NavigationArrows } from '../../../../shared/components/navigation-arrows/navigation-arrows';
 import { SidebarNav } from '../../../../shared/components/sidebar-nav/sidebar-nav';
+import { Topnav } from '../../../../shared/components/topnav/topnav';
 import { CaseStudyNavigation } from '../../components/case-study-navigation/case-study-navigation';
 import { Proceso } from '../../components/case-study/sections/proceso/proceso';
 import { Resultados } from '../../components/case-study/sections/resultados/resultados';
@@ -13,7 +14,7 @@ import { Solucion } from '../../components/case-study/sections/solucion/solucion
 
 @Component({
   selector: 'app-project-detail',
-  imports: [SidebarNav, NavigationArrows, Resumen, Proceso, Solucion, Resultados, CaseStudyNavigation],
+  imports: [Topnav, SidebarNav, NavigationArrows, Resumen, Proceso, Solucion, Resultados, CaseStudyNavigation],
   templateUrl: './project-detail.html',
   styleUrl: './project-detail.scss',
 })

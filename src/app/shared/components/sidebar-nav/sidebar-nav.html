@@ -3,6 +3,16 @@
     <div class="sidebar-content">
         <div class="nav-top">
             <div class="nav nav-pills flex-column">
+                @if (isProjectPage$ | async) {
+                <a class="nav-link nav-link-home" (click)="navigateToHome()" [attr.aria-label]="'Volver al inicio'">
+                    <div class="nav-icon">
+                        <i class="ph ph-house"></i>
+                    </div>
+                    <div class="nav-text">
+                        <span>Home</span>
+                    </div>
+                </a>
+                }
                 @for (section of sections$ | async; track section.id) {
                 <a class="nav-link" [class.active]="(currentSection$ | async) === section.id"
                     (click)="navigateToSection(section.id)" [attr.aria-label]="'Navegar a ' + section.label">

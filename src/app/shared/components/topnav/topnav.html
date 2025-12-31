@@ -17,6 +17,12 @@
     @if (isMenuOpen()) {
     <div class="topnav-menu">
         <div class="menu-items">
+            @if (isProjectPage$ | async) {
+            <a class="menu-item menu-item-home" (click)="navigateToHome()">
+                <i class="ph ph-house"></i>
+                <span>Home</span>
+            </a>
+            }
             @for (section of sections$ | async; track section.id) {
             <a class="menu-item" [class.active]="(currentSection$ | async) === section.id"
                 (click)="navigateToSection(section.id)">

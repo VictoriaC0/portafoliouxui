@@ -89,6 +89,21 @@
                     color: #fff;
                     border-left-color: #fff;
                 }
+
+                &.menu-item-home {
+                    border-left-color: #72EBFF;
+                    background: rgba(114, 235, 255, 0.05);
+                    color: rgba(255, 255, 255, 0.9);
+
+                    i {
+                        color: #72EBFF;
+                    }
+
+                    &:hover {
+                        background: rgba(114, 235, 255, 0.15);
+                        border-left-color: #72EBFF;
+                    }
+                }
             }
         }
     }

@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { NavigationService } from '../../../core/services/navigation.service';
@@ -20,6 +21,7 @@ interface NavSection {
 export class SidebarNav {
   private navigationService = inject(NavigationService);
   private responsiveService = inject(ResponsiveService);
+  private router = inject(Router);
 
   isDesktop$ = this.responsiveService.isDesktop$;
   currentSection$ = this.navigationService.currentSection$;
@@ -28,8 +30,16 @@ export class SidebarNav {
     map(sections => this.mapToNavSections(sections))
   );
 
+  isProjectPage$ = this.navigationService.sections$.pipe(
+    map(sections => sections.includes('resumen') || sections.includes('proceso'))
+  );
+
   navigateToSection(sectionId: string): void {
     this.navigationService.navigateToSection(sectionId);
+  }
+
+  navigateToHome(): void {
+    this.router.navigate(['/']);
   }
 
   private mapToNavSections(sections: string[]): NavSection[] {

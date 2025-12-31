@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { NavigationService } from '../../../core/services/navigation.service';
@@ -20,6 +21,7 @@ interface NavSection {
 export class Topnav {
   private navigationService = inject(NavigationService);
   private responsiveService = inject(ResponsiveService);
+  private router = inject(Router);
 
   isMobile$ = this.responsiveService.isDesktop$.pipe(map(isDesktop => !isDesktop));
   currentSection$ = this.navigationService.currentSection$;
@@ -30,12 +32,21 @@ export class Topnav {
     map(sections => this.mapToNavSections(sections))
   );
 
+  isProjectPage$ = this.navigationService.sections$.pipe(
+    map(sections => sections.includes('resumen') || sections.includes('proceso'))
+  );
+
   toggleMenu(): void {
     this.isMenuOpen.update(value => !value);
   }
 
   navigateToSection(sectionId: string): void {
     this.navigationService.navigateToSection(sectionId);
+    this.isMenuOpen.set(false); // Close menu after navigation
+  }
+
+  navigateToHome(): void {
+    this.router.navigate(['/']);
     this.isMenuOpen.set(false); // Close menu after navigation
   }
 
