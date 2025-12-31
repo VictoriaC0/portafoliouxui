@@ -1,0 +1,13 @@
+@if (isDesktop$ | async) {
+<div class="navigation-arrows">
+    <button class="arrow-btn prev-btn" [disabled]="!(canNavigatePrevious$ | async)" (click)="navigatePrevious()"
+        aria-label="Sección anterior">
+        <i class="ph ph-caret-left"></i>
+    </button>
+
+    <button class="arrow-btn next-btn" [disabled]="!(canNavigateNext$ | async)" (click)="navigateNext()"
+        aria-label="Siguiente sección">
+        <i class="ph ph-caret-right"></i>
+    </button>
+</div>
+}

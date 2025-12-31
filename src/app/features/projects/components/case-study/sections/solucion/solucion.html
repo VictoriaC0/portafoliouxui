@@ -1,0 +1,23 @@
+<div class="container-fluid h-100">
+    <div class="row h-100 align-items-center justify-content-center">
+        <div class="col-lg-10">
+            <h2 class="display-3 mb-5">Solución Final</h2>
+
+            <div class="row">
+                <div class="col-lg-8 mb-4">
+                    <h3>Propuesta de Valor</h3>
+                    <p>{{ caseData().SOLUTION_DESCRIPTION }}</p>
+
+                    <h3 class="mt-4">Características Principales</h3>
+                    <ul class="feature-list" [innerHTML]="caseData().FEATURES_LIST"></ul>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <div class="solution-highlight">
+                        <h4>Impacto Clave</h4>
+                        <p>{{ caseData().KEY_IMPACT }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

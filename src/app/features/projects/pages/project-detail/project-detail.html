@@ -1,0 +1,29 @@
+<!-- Navigation Components -->
+<app-sidebar-nav></app-sidebar-nav>
+<app-navigation-arrows></app-navigation-arrows>
+
+<div id="main-container" class="main-container">
+    @if (project(); as proj) {
+    <div id="sections-container" class="sections-container">
+
+        <section id="resumen" class="section" data-section="resumen">
+            <app-resumen [caseData]="proj.caseStudy"></app-resumen>
+        </section>
+
+        <section id="proceso" class="section" data-section="proceso">
+            <app-proceso [caseData]="proj.caseStudy"></app-proceso>
+        </section>
+
+        <section id="solucion" class="section" data-section="solucion">
+            <app-solucion [caseData]="proj.caseStudy"></app-solucion>
+        </section>
+
+        <section id="resultados" class="section" data-section="resultados">
+            <app-resultados [caseData]="proj.caseStudy"></app-resultados>
+        </section>
+
+    </div>
+
+    <app-case-study-navigation [currentProjectId]="proj.id"></app-case-study-navigation>
+    }
+</div>

@@ -1,0 +1,45 @@
+// ===== SCSS VARIABLES =====
+// Reemplaza las custom properties CSS (--var) con variables SCSS ($var)
+
+// Colors - Background
+$bg-primary: #1E1E1E;
+$bg-secondary: #121d27;
+
+// Colors - Text
+$text-primary: #F2F2F2;
+$text-secondary: #F2F2F2;
+
+// Colors - Accents
+$accent-blue: #72EBFF;
+$accent-purple: #8a2be2;
+$accent-green: #3cb371;
+
+// Glass Effect Variables
+$glass-bg: rgba(255, 255, 255, 0.05);
+$glass-border: #F2F2F2;
+$glass-shadow: rgba(0, 0, 0, 0.3);
+
+// Transitions
+$transition-base: 0.3s ease;
+$transition-long: 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+// Breakpoints
+$breakpoint-mobile: 767.98px;
+$breakpoint-tablet: 991.98px;
+$breakpoint-desktop: 992px;
+$breakpoint-large: 1199.98px;
+
+// Spacing
+$sidebar-width: 100px;
+$sidebar-offset: 30px;
+$nav-arrow-left: 150px;
+$nav-arrow-right: 50px;
+
+// Z-index layers
+$z-navigation: 1000;
+$z-arrows: 999;
+$z-background: -1;
+
+// Typography
+$font-family-base: "General Sans", sans-serif;
+$line-height-base: 1.6;

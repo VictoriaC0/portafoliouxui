@@ -1,0 +1,21 @@
+@if (isDesktop$ | async) {
+<nav class="sidebar">
+    <div class="sidebar-content">
+        <div class="nav-top">
+            <div class="nav nav-pills flex-column">
+                @for (section of sections$ | async; track section.id) {
+                <a class="nav-link" [class.active]="(currentSection$ | async) === section.id"
+                    (click)="navigateToSection(section.id)" [attr.aria-label]="'Navegar a ' + section.label">
+                    <div class="nav-icon">
+                        <i [class]="'ph ph-' + section.icon"></i>
+                    </div>
+                    <div class="nav-text">
+                        <span>{{ section.label }}</span>
+                    </div>
+                </a>
+                }
+            </div>
+        </div>
+    </div>
+</nav>
+}

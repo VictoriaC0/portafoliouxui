@@ -1,0 +1,39 @@
+// ===== PORTAFOLIOUXUI - MAIN STYLES =====
+// Arquitectura SCSS modular basada en el diseño glassmorphism original
+
+// 1. Configuration & Helpers
+@use 'styles/variables' as *;
+@use 'styles/mixins' as *;
+
+// 2. Base & Reset
+@use 'styles/reset';
+
+// 3. Typography
+@use 'styles/typography';
+
+// 4. Layout
+@use 'styles/layout';
+
+// 5. Navigation
+@use 'styles/navigation';
+
+// 6. Components
+@use 'styles/components';
+
+// You can add additional global styles below or import Bootstrap/libraries
+// Bootstrap 5.3 will be imported via angular.json or here if needed
+
+// CSS Custom Properties (para componentes encapsulados)
+// Esto debe ir DESPUÉS de todos los @use
+:root {
+    --bg-primary: #{$bg-primary};
+    --bg-secondary: #{$bg-secondary};
+    --text-primary: #{$text-primary};
+    --text-secondary: #{$text-secondary};
+    --accent-blue: #{$accent-blue};
+    --accent-purple: #{$accent-purple};
+    --accent-green: #{$accent-green};
+    --glass-bg: #{$glass-bg};
+    --glass-border: #{$glass-border};
+    --glass-shadow: #{$glass-shadow};
+}

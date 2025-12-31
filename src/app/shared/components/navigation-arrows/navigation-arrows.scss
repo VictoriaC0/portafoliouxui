@@ -1,0 +1,61 @@
+.navigation-arrows {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    z-index: 999;
+    pointer-events: none;
+
+    .arrow-btn {
+        position: absolute;
+        top: 0;
+        width: 50px;
+        height: 50px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 50%;
+        color: #fff;
+        font-size: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        pointer-events: auto;
+        opacity: 0.7;
+
+        i {
+            display: block;
+        }
+
+        &:hover:not(:disabled) {
+            opacity: 1;
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        &:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        &.prev-btn {
+            left: 100px; // Offset from sidebar (80px + 20px margin)
+        }
+
+        &.next-btn {
+            right: 20px;
+        }
+    }
+}
+
+// Hide on mobile
+@media (max-width: 991px) {
+    .navigation-arrows {
+        display: none;
+    }
+}

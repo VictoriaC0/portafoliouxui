@@ -1,0 +1,85 @@
+// ===== RESET Y ESTILOS BASE =====
+
+@use 'variables' as *;
+
+// Reset universal
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+// Configuración HTML
+html {
+    scroll-behavior: smooth;
+}
+
+// Configuración Body
+body {
+    font-family: $font-family-base;
+    background: $bg-primary;
+    color: $text-primary;
+    line-height: $line-height-base;
+    height: 100vh;
+}
+
+// Prevenir scroll por defecto en desktop para páginas específicas
+@media (min-width: $breakpoint-desktop) {
+
+    html:has(body.index-page),
+    html:has(body.project-page) {
+        overflow: hidden;
+    }
+
+    body.index-page,
+    body.project-page {
+        overflow: hidden;
+    }
+}
+
+// Configuración para mobile (permitir scroll nativo)
+@media (max-width: $breakpoint-tablet) {
+
+    html,
+    body {
+        overflow: auto;
+    }
+}
+
+// Smooth transitions globales
+* {
+    transition: color $transition-base,
+        background-color $transition-base,
+        border-color $transition-base;
+}
+
+// Preferencias de movimiento reducido (accesibilidad)
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .sections-container {
+        transition-duration: 0.01ms !important;
+    }
+}
+
+// Estilos de scrollbar
+.sections-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.sections-container::-webkit-scrollbar-track {
+    background: $bg-secondary;
+}
+
+.sections-container::-webkit-scrollbar-thumb {
+    background: $glass-border;
+    border-radius: 4px;
+
+    &:hover {
+        background: $accent-blue;
+    }
+}

@@ -1,0 +1,84 @@
+// ===== TYPOGRAPHY =====
+
+@use 'variables' as *;
+
+// Display Headings
+.display-1 {
+    font-weight: 200;
+    font-size: clamp(3rem, 8vw, 6rem);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    font-style: italic;
+}
+
+.display-2 {
+    font-weight: 300;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+
+.display-3 {
+    font-weight: 300;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+
+.display-4 {
+    font-weight: 300;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+
+.display-5 {
+    font-weight: 300;
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+
+// Lead paragraph
+.lead {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-weight: 400;
+    color: $text-secondary;
+    line-height: 1.6;
+
+    @media (max-width: $breakpoint-mobile) {
+        font-size: 1rem;
+    }
+}
+
+// Intro text
+.intro-text {
+    max-width: 600px;
+    margin: 0 auto;
+
+    strong {
+        font-weight: 600;
+    }
+
+    @media (max-width: $breakpoint-mobile) {
+        text-align: left;
+    }
+}
+
+// Case study typography
+.case-header {
+    text-align: center;
+}
+
+.case-subtitle {
+    color: $text-secondary;
+    font-style: italic;
+}
+
+// Utility classes
+.text-gradient {
+    background: linear-gradient(45deg, $accent-blue, $accent-purple);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}

@@ -1,0 +1,3 @@
+[submodule "sia"]
+	path = sia
+	url = https://github.com/gpilleux/sia.git

@@ -1,0 +1,84 @@
+// ===== GLASSMORPHISM MIXINS =====
+// Mixins reutilizables para efectos de cristal esmerilado
+
+@use 'variables' as *;
+
+// Mixin principal de glassmorphism
+@mixin glass-effect($bg: $glass-bg,
+    $blur: 10px,
+    $border-color: $glass-border,
+    $border-width: 1px,
+    $border-radius: 16px,
+    $shadow: 0 8px 32px $glass-shadow) {
+    background: $bg;
+    backdrop-filter: blur($blur);
+    -webkit-backdrop-filter: blur($blur);
+    border: $border-width solid $border-color;
+    border-radius: $border-radius;
+    box-shadow: $shadow;
+}
+
+// Variante de glass effect para sidebar
+@mixin glass-sidebar {
+    @include glass-effect($bg: transparent,
+        $blur: 20px,
+        $border-radius: 50px,
+        $shadow: 0 8px 32px $glass-shadow );
+}
+
+// Variante de glass effect para tarjetas
+@mixin glass-card {
+    @include glass-effect($bg: $glass-bg,
+        $blur: 10px,
+        $border-radius: 16px,
+        $shadow: none);
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.08);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+    }
+}
+
+// Mixin para fondo con gradiente glass
+@mixin glass-gradient-bg {
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg,
+                rgba(74, 158, 255, 0.05) 0%,
+                rgba(138, 43, 226, 0.05) 50%,
+                rgba(60, 179, 113, 0.05) 100%);
+        border-radius: inherit;
+        z-index: $z-background;
+    }
+}
+
+// Mixin para shimmer effect (efecto de brillo)
+@mixin shimmer-effect {
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg,
+                transparent,
+                rgba(255, 255, 255, 0.1),
+                transparent);
+        transition: left 0.5s ease;
+    }
+
+    &:hover::before {
+        left: 100%;
+    }
+}

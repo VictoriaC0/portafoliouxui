@@ -1,0 +1,252 @@
+// ===== COMPONENTS =====
+
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// ===== PROJECT CARDS =====
+.project-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-items: flex-start;
+
+    .view-project {
+        align-self: center;
+        margin-top: auto;
+    }
+}
+
+.project-card {
+    @include glass-card;
+    padding: 2rem;
+    transition: all $transition-base;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    &:hover {
+        transform: translateY(-5px);
+    }
+
+    h4 {
+        text-align: left;
+    }
+
+    h5 {
+        color: $text-primary;
+        margin-bottom: 1rem;
+        font-weight: 500;
+    }
+
+    p {
+        color: $text-secondary;
+        margin-bottom: 0;
+    }
+
+    @media (max-width: $breakpoint-tablet) {
+        margin-bottom: 1rem;
+    }
+
+    @media (max-width: $breakpoint-mobile) {
+        padding: 1.5rem;
+    }
+}
+
+.project-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+
+    i {
+        font-size: 2rem;
+        color: $accent-blue;
+    }
+}
+
+.project-description {
+    color: $text-secondary;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    text-align: left;
+    flex-grow: 1;
+}
+
+.project-tags {
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.2rem;
+
+    .badge {
+        font-size: 0.75rem;
+        font-weight: 300;
+        color: $accent-blue !important;
+        padding: 0.4rem 0.8rem;
+        background-color: $bg-secondary !important;
+    }
+}
+
+// ===== BUTTONS =====
+.btn-outline-light {
+    border: 2px solid $glass-border;
+    color: $text-primary;
+    background: transparent;
+    padding: 0.75rem 2rem;
+    border-radius: 50px;
+    font-weight: 500;
+    transition: all $transition-base;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    &:hover {
+        background: $glass-bg;
+        border-color: $accent-blue;
+        color: $accent-blue;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(74, 158, 255, 0.3);
+    }
+
+    &:active {
+        background-color: $accent-blue !important;
+        border-color: yellow !important;
+        color: $bg-primary !important;
+    }
+
+    &:focus {
+        outline: 2px solid $accent-blue;
+        outline-offset: 2px;
+    }
+}
+
+// ===== CONTACT INFO =====
+.contact-info {
+    max-width: 400px;
+    margin: 0 auto;
+
+    p {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        margin-bottom: 1.5rem;
+        font-size: 1.1rem;
+        color: $text-primary;
+
+        @media (max-width: $breakpoint-mobile) {
+            font-size: 1rem;
+        }
+    }
+
+    i {
+        color: $accent-blue;
+        width: 24px;
+    }
+
+    @media (max-width: $breakpoint-tablet) {
+        text-align: left !important;
+    }
+}
+
+// ===== CASE STUDY COMPONENTS =====
+.case-header {
+    text-align: center;
+}
+
+.case-subtitle {
+    color: $text-secondary;
+    font-style: italic;
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.metric-item {
+    text-align: center;
+    padding: 1rem;
+    @include glass-effect;
+    transition: all $transition-base;
+
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(74, 158, 255, 0.2);
+    }
+
+    h5 {
+        font-size: 2rem;
+        font-weight: 600;
+        color: $accent-blue;
+        margin-bottom: 0.5rem;
+    }
+
+    p {
+        font-size: 0.9rem;
+        color: $text-secondary;
+        margin: 0;
+    }
+}
+
+.solution-highlight {
+    @include glass-effect;
+    padding: 2rem;
+    height: 100%;
+
+    h4 {
+        color: $accent-green;
+        margin-bottom: 1rem;
+    }
+}
+
+.feature-list {
+    list-style: none;
+    padding: 0;
+
+    li {
+        padding: 0.5rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        position: relative;
+        padding-left: 1.5rem;
+
+        &:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: $accent-blue;
+            font-weight: bold;
+        }
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+}
+
+// ===== TRANSLATION SERVICES =====
+.translation-services {
+
+    h4,
+    h5 {
+        color: $accent-green;
+        margin-bottom: 1rem;
+        font-weight: 500;
+    }
+
+    p {
+        color: $text-secondary;
+    }
+}
+
+// ===== UTILITY CLASSES =====
+.glass-card {
+    @include glass-card;
+}
+
+.animate-in {
+    animation: fadeInUp 0.6s ease-out forwards;
+}

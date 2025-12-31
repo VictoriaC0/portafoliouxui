@@ -1,0 +1,17 @@
+<div class="project-card" [attr.data-project]="project().id">
+    <div class="project-icon">
+        <i [class]="'ph ph-' + project().icon"></i>
+    </div>
+    <div class="project-content">
+        <div class="project-tags">
+            @for (tag of project().tags; track tag.id) {
+            <span class="badge bg-secondary me-1">{{ tag.label }}</span>
+            }
+        </div>
+        <h4>{{ project().title }}</h4>
+        <p class="project-description">{{ project().description }}</p>
+        <button class="btn btn-outline-light btn-sm mt-3 view-project" (click)="viewProject()">
+            Ver Proyecto <i class="ph ph-arrow-right ms-2"></i>
+        </button>
+    </div>
+</div>

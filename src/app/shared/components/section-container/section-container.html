@@ -1,0 +1,4 @@
+<div id="sections-container" class="sections-container" [class.desktop-mode]="isDesktop$ | async"
+    [class.mobile-mode]="!(isDesktop$ | async)">
+    <ng-content></ng-content>
+</div>

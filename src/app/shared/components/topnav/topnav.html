@@ -1,0 +1,31 @@
+@if (isMobile$ | async) {
+<nav class="topnav">
+    <div class="topnav-content">
+        <div class="topnav-brand">
+            <h1>PORTAFOLIO</h1>
+        </div>
+
+        <button class="menu-toggle" (click)="toggleMenu()" [attr.aria-expanded]="isMenuOpen()" aria-label="Toggle menu">
+            @if (isMenuOpen()) {
+            <i class="ph ph-x"></i>
+            } @else {
+            <i class="ph ph-list"></i>
+            }
+        </button>
+    </div>
+
+    @if (isMenuOpen()) {
+    <div class="topnav-menu">
+        <div class="menu-items">
+            @for (section of sections$ | async; track section.id) {
+            <a class="menu-item" [class.active]="(currentSection$ | async) === section.id"
+                (click)="navigateToSection(section.id)">
+                <i [class]="'ph ph-' + section.icon"></i>
+                <span>{{ section.label }}</span>
+            </a>
+            }
+        </div>
+    </div>
+    }
+</nav>
+}
