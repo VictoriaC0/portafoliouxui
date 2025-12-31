@@ -83,6 +83,30 @@ export class ProjectService {
     }
 
     /**
+     * Check if current project is the last one
+     */
+    isLastProject(currentId: string): boolean {
+        const activeProjects = this.projectsSubject.value
+            .filter(p => p.isActive)
+            .sort((a, b) => a.order - b.order);
+
+        const currentIndex = activeProjects.findIndex(p => p.id === currentId);
+        return currentIndex === activeProjects.length - 1;
+    }
+
+    /**
+     * Check if current project is the first one
+     */
+    isFirstProject(currentId: string): boolean {
+        const activeProjects = this.projectsSubject.value
+            .filter(p => p.isActive)
+            .sort((a, b) => a.order - b.order);
+
+        const currentIndex = activeProjects.findIndex(p => p.id === currentId);
+        return currentIndex === 0;
+    }
+
+    /**
      * Get previous project (circular navigation)
      */
     getPreviousProject(currentId: string): Project | undefined {
