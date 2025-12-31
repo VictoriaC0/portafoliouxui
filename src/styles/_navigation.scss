@@ -169,16 +169,16 @@
 // ===== NAVIGATION ARROWS (DESKTOP) =====
 .navigation-arrows {
     position: fixed;
-    top: 50%;
-    transform: translateY(-50%);
+    bottom: 30px;
+    right: 30px;
     z-index: $z-arrows;
     pointer-events: none;
+    display: flex;
+    gap: 15px;
 }
 
 .nav-arrow {
-    position: fixed;
-    top: 50%;
-    transform: translateY(-50%);
+    position: relative;
     width: 50px;
     height: 50px;
     @include glass-effect($bg: $glass-bg,
@@ -198,13 +198,13 @@
     &:hover {
         background: rgba(255, 255, 255, 0.1);
         color: $accent-blue;
-        transform: translateY(-50%) scale(1.1);
+        transform: scale(1.1);
         opacity: 1;
         box-shadow: 0 8px 25px rgba(74, 158, 255, 0.3);
     }
 
     &:active {
-        transform: translateY(-50%) scale(0.95);
+        transform: scale(0.95);
     }
 
     &:disabled {
@@ -219,11 +219,11 @@
     }
 
     &-left {
-        left: $nav-arrow-left;
+        order: 1;
     }
 
     &-right {
-        right: $nav-arrow-right;
+        order: 2;
     }
 }
 
