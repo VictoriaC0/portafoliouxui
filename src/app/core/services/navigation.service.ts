@@ -149,7 +149,7 @@ export class NavigationService {
     }
 
     /**
-     * Navigate to a specific section by ID and apply horizontal scroll
+     * Navigate to a specific section by ID and apply horizontal scroll (desktop) or vertical scroll (mobile)
      */
     navigateToSection(sectionId: string): void {
         const state = this.navigationStateSubject.value;
@@ -158,7 +158,14 @@ export class NavigationService {
         }
 
         this.updateActiveSection(sectionId);
-        this.scrollToHorizontalSection(state.sections.indexOf(sectionId));
+
+        if (this.isDesktopMode()) {
+            // Desktop: horizontal scroll
+            this.scrollToHorizontalSection(state.sections.indexOf(sectionId));
+        } else {
+            // Mobile: vertical scroll to section
+            this.scrollToVerticalSection(sectionId);
+        }
     }
 
     /**
@@ -192,7 +199,7 @@ export class NavigationService {
     }
 
     /**
-     * Apply horizontal scroll transformation
+     * Apply horizontal scroll transformation (desktop)
      */
     private scrollToHorizontalSection(index: number): void {
         if (!this.isBrowser || !this.isDesktopMode()) return;
@@ -207,6 +214,21 @@ export class NavigationService {
         setTimeout(() => {
             this.isScrolling = false;
         }, this.ANIMATION_DURATION);
+    }
+
+    /**
+     * Apply vertical scroll to section (mobile)
+     */
+    private scrollToVerticalSection(sectionId: string): void {
+        if (!this.isBrowser || this.isDesktopMode()) return;
+
+        const sectionElement = document.getElementById(sectionId);
+        if (!sectionElement) return;
+
+        sectionElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
     }
 
     /**

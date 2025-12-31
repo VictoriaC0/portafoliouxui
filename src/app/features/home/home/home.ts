@@ -2,6 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import { Component, OnDestroy, OnInit, Renderer2, inject } from '@angular/core';
 import { NavigationArrows } from '../../../shared/components/navigation-arrows/navigation-arrows';
 import { SidebarNav } from '../../../shared/components/sidebar-nav/sidebar-nav';
+import { Topnav } from '../../../shared/components/topnav/topnav';
 import { Acerca } from '../sections/acerca/acerca';
 import { Casos } from '../sections/casos/casos';
 import { Contacto } from '../sections/contacto/contacto';
@@ -9,7 +10,7 @@ import { Inicio } from '../sections/inicio/inicio';
 
 @Component({
   selector: 'app-home',
-  imports: [SidebarNav, NavigationArrows, Inicio, Casos, Acerca, Contacto],
+  imports: [Topnav, SidebarNav, NavigationArrows, Inicio, Casos, Acerca, Contacto],
   templateUrl: './home.html',
   styleUrl: './home.scss'
 })
