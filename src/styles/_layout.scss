@@ -87,6 +87,11 @@
         scroll-margin-top: 80px; // Offset for fixed topnav when scrollIntoView is triggered
         scroll-snap-align: start; // Enable scroll snapping
     }
+
+    // Override background-size for inicio section in mobile
+    #inicio {
+        background-size: cover !important;
+    }
 }
 
 // Section performance
